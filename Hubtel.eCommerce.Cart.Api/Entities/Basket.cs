@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Hubtel.eCommerce.Cart.Api.Entities
 {
@@ -44,7 +43,7 @@ namespace Hubtel.eCommerce.Cart.Api.Entities
 
             if (item == null) return new HelperResponse { Successful = false, ResponseMessage = "Item does not exist in cart, check and try again." };
 
-            if(quantity > item.Quantity) return new HelperResponse { Successful = false, ResponseMessage = $"Item quantity cannot be reduced. You have quantity of {item.Quantity} in your cart" };
+            if (quantity > item.Quantity) return new HelperResponse { Successful = false, ResponseMessage = $"Item quantity cannot be reduced. You have quantity of {item.Quantity} in your cart" };
 
             item.Quantity -= quantity;
 

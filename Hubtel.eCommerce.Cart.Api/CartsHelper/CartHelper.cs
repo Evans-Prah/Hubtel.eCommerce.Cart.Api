@@ -3,6 +3,7 @@ using Hubtel.eCommerce.Cart.Api.DTOs;
 using Hubtel.eCommerce.Cart.Api.Entities;
 using Hubtel.eCommerce.Cart.Api.Extensions;
 using Hubtel.eCommerce.Cart.Api.Models;
+using Hubtel.eCommerce.Cart.Api.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -71,6 +72,10 @@ namespace Hubtel.eCommerce.Cart.Api.CartsHelper
             if (quantity < 1) return new HelperResponse { Successful = false, ResponseMessage = "Quantity should be at least 1" };
 
             if (string.IsNullOrWhiteSpace(phoneNumber)) return new HelperResponse { Successful = false, ResponseMessage = "Phone number is required" };
+
+            if (!PhoneNumberUtility.IsValidMsisdn12Digits(phoneNumber)) return new HelperResponse { Successful = false, ResponseMessage = "Enter a valid phone number" };
+
+            phoneNumber = PhoneNumberUtility.FormatNumber12Digits(phoneNumber);
 
             var cart = await RetrieveCart();
 
